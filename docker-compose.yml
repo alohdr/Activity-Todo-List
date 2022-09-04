@@ -1,0 +1,41 @@
+services:
+  hendro-api-catgan:
+    image: bamasatya/api-catgan
+    container_name: hendro-api-catgan
+    networks:
+      - hendro-catgan-network
+    environment:
+      - DB_HOST=hendro-postgres-catgan
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASS=password
+      - DB_DIALECT=postgres
+      - DB_NAME_TEST=catgan
+      - DB_NAME_DEVELOPMENT=catgan
+      - DB_NAME_PRODUCTION=catgan
+      - JWTKEY=catgan_secret_key
+      - TOKEN_EXPIRATION=48h
+      - BEARER=Bearer
+    command: npm run start:prod
+    ports:
+      - 3000:3000
+    depends_on:
+      - hendro-postgres-catgan
+  hendro-postgres-catgan:
+    image: postgres:latest
+    container_name: hendro-postgres-catgan
+    restart: always
+    networks:
+      - hendro-catgan-network
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: catgan
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+volumes:
+  database-data:
+networks:
+  hendro-catgan-network:

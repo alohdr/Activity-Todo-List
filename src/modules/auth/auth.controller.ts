@@ -20,4 +20,9 @@ export class AuthController {
     async signUp(@Body() user: UserDto) {
         return await this.authService.create(user);
     }
+
+    @Post('logout')
+    async logout() {
+        return await this.authService.logout();
+    }
 }

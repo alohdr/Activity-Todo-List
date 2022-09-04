@@ -8,14 +8,16 @@ import { ActivityDto, ActivityEditDto } from './dto/activities.dto';
 export class ActivitiesController {
     constructor(private readonly activityService: ActivitiesService) { }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get()
-    async findAll() {
-        return await this.activityService.findAll();
+    async findAll(@Request() req) {
+        return await this.activityService.findAll(req.user.id);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get(':id')
-    async findOne(@Param('id') id: number): Promise<ActivityEntity> {
-        const post = await this.activityService.findOne(id);
+    async findOne(@Param('id') id: number,@Request() req): Promise<ActivityEntity> {
+        const post = await this.activityService.findOne(id,req.user.id);
 
         if (!post) {
             throw new NotFoundException('This Activity doesn\'t exist');
@@ -51,6 +53,11 @@ export class ActivitiesController {
             throw new NotFoundException('This Activity doesn\'t exist');
         }
 
-        return 'Successfully deleted';
+        let respError = {
+            status: "Success",
+            message:"Successfully deleted"
+        }
+
+        return respError;
     }
 }
