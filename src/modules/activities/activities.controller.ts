@@ -10,14 +10,14 @@ export class ActivitiesController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get()
-    async findAll() {
-        return await this.activityService.findAll();
+    async findAll(@Request() req) {
+        return await this.activityService.findAll(req.user.id);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Get(':id')
-    async findOne(@Param('id') id: number): Promise<ActivityEntity> {
-        const post = await this.activityService.findOne(id);
+    async findOne(@Param('id') id: number,@Request() req): Promise<ActivityEntity> {
+        const post = await this.activityService.findOne(id,req.user.id);
 
         if (!post) {
             throw new NotFoundException('This Activity doesn\'t exist');

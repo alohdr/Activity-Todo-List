@@ -12,15 +12,16 @@ export class ActivitiesService {
         return await this.activityRepository.create<Activity>({ ...post, userId });
     }
 
-    async findAll(): Promise<Activity[]> {
+    async findAll(userId): Promise<Activity[]> {
         return await this.activityRepository.findAll<Activity>({
+            where: {userId},
         	include: [{ model: User, attributes: { exclude: ['password'] } }],
     	});
     }
 
-    async findOne(id): Promise<Activity> {
+    async findOne(id,userId): Promise<Activity> {
         return await this.activityRepository.findOne({
-        	where: { id },
+        	where: { id, userId },
         	include: [{ model: User, attributes: { exclude: ['password'] } }],
     	});
     }
