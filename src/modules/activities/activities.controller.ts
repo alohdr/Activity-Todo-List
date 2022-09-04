@@ -54,16 +54,17 @@ export class ActivitiesController {
     @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     async remove(@Param('id') id: number, @Request() req) {
-        // delete the post with this id
         const deleted = await this.activityService.delete(id, req.user.id);
 
-        // if the number of row affected is zero, 
-        // then the post doesn't exist in our db
         if (deleted === 0) {
             throw new NotFoundException('This Activity doesn\'t exist');
         }
 
-        // return success message
-        return 'Successfully deleted';
+        let respError = {
+            status: "Success",
+            message:"Successfully deleted"
+        }
+
+        return respError;
     }
 }
