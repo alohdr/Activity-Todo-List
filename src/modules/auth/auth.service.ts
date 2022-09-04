@@ -10,20 +10,17 @@ export class AuthService {
     constructor(private readonly userService: UsersService,private readonly jwtService: JwtService,) { }
 
     async validateUser(username: string, pass: string) {
-        // find if user exist with this email
         const user = await this.userService.findOneByEmail(username, username);
         if (!user) {
             return null;
         }
 
 
-        // find if user password match
         const match = await this.comparePassword(pass, user.password);
         if (!match) {
             return null;
         }
 
-        // tslint:disable-next-line: no-string-literal
         const { password, ...result } = user['dataValues'];
         return result;
     }
@@ -44,22 +41,16 @@ export class AuthService {
     }
 
     public async create(user) {
-        // confirm password
         await this.confirmPassword(user.password, user.confirm_password)
 
-        // hash the password
         const pass = await this.hashPassword(user.password);
 
-        // create the user
         const newUser = await this.userService.create({ ...user, password: pass});
 
-        // tslint:disable-next-line: no-string-literal
         const { password, ...result } = newUser['dataValues'];
 
-        // generate token
         const token = await this.generateToken(result);
 
-        // return the user and the token
         return { user: result, token };
     }
 
