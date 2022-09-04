@@ -1,0 +1,244 @@
+{
+    "id": "91b11351-a7c7-4b17-b62d-e4a590ce92bb",
+    "name": "Catgan",
+    "order": [
+        "665c52c1-dbf0-4995-987b-c56820475006",
+        "c2416094-afe9-4ada-b002-da68cbd77f0b",
+        "c252bf16-8ac2-483e-9635-11277e748dfd",
+        "7a46d795-f428-4af5-803b-edc628fe57af",
+        "7e39b774-dcf6-4bdf-8915-e6d088bb1be7",
+        "5f52b935-a65b-40ab-b812-7e965a0a5d69",
+        "79699179-7144-4756-acf5-a81257fe3cb8"
+    ],
+    "folders_order": [],
+    "folders": [],
+    "requests": [
+        {
+            "id": "665c52c1-dbf0-4995-987b-c56820475006",
+            "name": "Register Catgan",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "POST",
+            "events": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "var jsonData = JSON.parse(responseBody);",
+                            "postman.setEnvironmentVariable(\"access_token\", jsonData.token);"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "headers": "",
+            "dataMode": "raw",
+            "rawModeData": "{\n    \"username\":\"alohdr\",\n    \"email\":\"alohdr@gmail.com\",\n    \"password\":\"040404\",\n    \"confirm_password\":\"040404\"\n}",
+            "tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"access_token\", jsonData.token);",
+            "preRequestScript": "",
+            "url": "{{host}}:{{port}}/api/v1/auth/signup",
+            "dataOptions": {
+                "raw": {
+                    "language": "json"
+                }
+            },
+            "responses": [],
+            "responses_order": [],
+            "pathVariableData": [],
+            "queryParams": [
+                {
+                    "key": "confirmPassword",
+                    "value": null,
+                    "enabled": false
+                }
+            ],
+            "headerData": []
+        },
+        {
+            "id": "c2416094-afe9-4ada-b002-da68cbd77f0b",
+            "name": "Login Catgan",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "POST",
+            "events": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "var jsonData = JSON.parse(responseBody);",
+                            "postman.setEnvironmentVariable(\"access_token\", jsonData.token);"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "headers": "",
+            "dataMode": "raw",
+            "rawModeData": "{\n    \"username\":\"alohdr\",\n    \"password\":\"040404\"\n}",
+            "tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"access_token\", jsonData.token);",
+            "preRequestScript": "",
+            "url": "{{host}}:{{port}}/api/v1/auth/login",
+            "dataOptions": {
+                "raw": {
+                    "language": "json"
+                }
+            },
+            "responses": [],
+            "responses_order": [],
+            "pathVariableData": [],
+            "queryParams": [],
+            "headerData": []
+        },
+        {
+            "id": "c252bf16-8ac2-483e-9635-11277e748dfd",
+            "name": "Post Activity",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "POST",
+            "currentHelper": "oAuth2",
+            "helperAttributes": {
+                "id": "oAuth2",
+                "addTokenTo": "header"
+            },
+            "auth": {
+                "type": "oauth2",
+                "oauth2": [
+                    {
+                        "key": 0,
+                        "value": {
+                            "key": "addTokenTo",
+                            "value": "header",
+                            "type": "string"
+                        },
+                        "type": "any"
+                    }
+                ]
+            },
+            "headers": "",
+            "dataMode": "raw",
+            "rawModeData": "{\n    \"title\":\"berenang\",\n    \"description\":\"beli pop mie , bawa shampo\",\n    \"date\": \"01/10/2022\",\n    \"time\": \"20:10\"\n}",
+            "url": "{{host}}:{{port}}/api/v1/activities",
+            "dataOptions": {
+                "raw": {
+                    "language": "json"
+                }
+            },
+            "responses": [],
+            "responses_order": [],
+            "pathVariableData": [],
+            "queryParams": [],
+            "headerData": []
+        },
+        {
+            "id": "7a46d795-f428-4af5-803b-edc628fe57af",
+            "name": "Get Activity",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "GET",
+            "headers": "",
+            "url": "",
+            "responses": [],
+            "responses_order": [],
+            "headerData": []
+        },
+        {
+            "id": "7e39b774-dcf6-4bdf-8915-e6d088bb1be7",
+            "name": "Get Activity By ID",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "GET",
+            "currentHelper": "oAuth2",
+            "helperAttributes": {
+                "id": "oAuth2",
+                "addTokenTo": "header"
+            },
+            "auth": {
+                "type": "oauth2",
+                "oauth2": [
+                    {
+                        "key": 0,
+                        "value": {
+                            "key": "addTokenTo",
+                            "value": "header",
+                            "type": "string"
+                        },
+                        "type": "any"
+                    }
+                ]
+            },
+            "headers": "",
+            "url": "{{host}}:{{port}}/api/v1/activities/1",
+            "responses": [],
+            "responses_order": [],
+            "pathVariableData": [],
+            "queryParams": [],
+            "headerData": []
+        },
+        {
+            "id": "5f52b935-a65b-40ab-b812-7e965a0a5d69",
+            "name": "Edit Activity By ID",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "PUT",
+            "currentHelper": "oAuth2",
+            "helperAttributes": {
+                "id": "oAuth2",
+                "addTokenTo": "header"
+            },
+            "auth": {
+                "type": "oauth2",
+                "oauth2": [
+                    {
+                        "key": 0,
+                        "value": {
+                            "key": "addTokenTo",
+                            "value": "header",
+                            "type": "string"
+                        },
+                        "type": "any"
+                    }
+                ]
+            },
+            "headers": "",
+            "dataMode": "raw",
+            "rawModeData": "{\n    \"title\":\"nobar\"\n}",
+            "url": "{{host}}:{{port}}/api/v1/activities/1",
+            "dataOptions": {
+                "raw": {
+                    "language": "json"
+                }
+            },
+            "responses": [],
+            "responses_order": [],
+            "pathVariableData": [],
+            "queryParams": [],
+            "headerData": []
+        },
+        {
+            "id": "79699179-7144-4756-acf5-a81257fe3cb8",
+            "name": "Delete Activity By ID",
+            "collectionId": "ece348bc-c221-4823-9b47-c3a9025daf8f",
+            "method": "DELETE",
+            "currentHelper": "oAuth2",
+            "helperAttributes": {
+                "id": "oAuth2",
+                "addTokenTo": "header"
+            },
+            "auth": {
+                "type": "oauth2",
+                "oauth2": [
+                    {
+                        "key": 0,
+                        "value": {
+                            "key": "addTokenTo",
+                            "value": "header",
+                            "type": "string"
+                        },
+                        "type": "any"
+                    }
+                ]
+            },
+            "headers": "",
+            "url": "{{host}}:{{port}}/api/v1/activities/1",
+            "responses": [],
+            "responses_order": [],
+            "pathVariableData": [],
+            "queryParams": [],
+            "headerData": []
+        }
+    ]
+}
