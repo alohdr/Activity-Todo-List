@@ -32,6 +32,16 @@ export class AuthService {
         const token = await this.generateToken(user);
         return { user, token };
     }
+    
+    public async logout() {
+
+        let logoutResponse = {
+            status:"success",
+            message:"logout successfully"
+        }
+
+        return logoutResponse;
+    }
 
     public async create(user) {
         // confirm password
