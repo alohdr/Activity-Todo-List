@@ -8,12 +8,14 @@ import { ActivityDto, ActivityEditDto } from './dto/activities.dto';
 export class ActivitiesController {
     constructor(private readonly activityService: ActivitiesService) { }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get()
     async findAll() {
         // get all posts in the db
         return await this.activityService.findAll();
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get(':id')
     async findOne(@Param('id') id: number): Promise<ActivityEntity> {
         // find the post with this id
