@@ -26,6 +26,38 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Requirements
+- db : postgres
+- node version 16.17.0
+- npm version 8.15.0
+
+## Usage
+
+1. Clone repository
+
+```
+  git clone https://gitlab.com/alohdr/catgan.git
+```
+
+2. Cd into directory
+
+```
+  cd catgan/
+```
+
+3. Rename .env
+
+```
+  mv .env-deployment
+ .env
+```
+
+4. Install dependencies using npm
+
+```
+  npm i
+```
+
 ## Installation
 
 ```bash
